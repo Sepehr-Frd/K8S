@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reddit-mockup-deployment
+  name: mongodb-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redditmockup
+      app: mongodb
   template:
     metadata:
       labels:
-        app: redditmockup
+        app: mongodb
     spec:
       containers:
-        - name: redditmockup
-          image: localhost/reddit-mockup-web:1.0
+        - name: mongodb
+          image: mongo:6.0.5
           resources:
             requests:
               memory: "512Mi"
@@ -22,19 +22,21 @@ spec:
             limits:
               memory: "1024Mi"
               cpu: "1.0"
+          ports:
+            - containerPort: 27017
+      volumes:
+        - name: mongodb
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: reddit-mockup-clusterip-service
+  name: mongodb-clusterip-service
 spec:
   type: ClusterIP
   selector:
-    app: redditmockup
+    app: mongodb
   ports:
-    - name: http
+    - name: mongodb
       protocol: TCP
-      port: 80
-    - name: https
-      protocol: TCP
-      port: 443
+      port: 27017
+      targetPort: 27017
