@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: amazonmockup
-          image: localhost/amazon-mockup-web:1.0
+          image: local/amazon-mockup-web:1.0
           resources:
             requests:
               memory: "512Mi"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: redditmockup
-          image: localhost/reddit-mockup-web:1.0
+          image: local/reddit-mockup-web:1.0
           resources:
             requests:
               memory: "512Mi"

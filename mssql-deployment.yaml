@@ -14,13 +14,10 @@ spec:
     spec:
       containers:
         - name: mssql
-          image: mcr.microsoft.com/azure-sql-edge:latest
+          image: local/mssql/server:2022
           resources:
-            requests:
-              memory: "512Mi"
-              cpu: "500m"
             limits:
-              memory: "1024Mi"
+              memory: "2048Mi"
               cpu: "1.0"
           ports:
             - containerPort: 1433
@@ -29,7 +26,7 @@ spec:
               value: "sa"
             - name: ACCEPT_EULA
               value: "Y"
-            - name: Password
+            - name: SA_PASSWORD
               value: "Sfr1376."
             - name: Trust_Server_Certificate
               value: "True"
@@ -40,6 +37,8 @@ spec:
               name: mssqldb
       volumes:
         - name: mssqldb
+          persistentVolumeClaim:
+            claimName: mssql-data
 ---
 apiVersion: v1
 kind: Service
@@ -54,3 +53,14 @@ spec:
       protocol: TCP
       port: 1433
       targetPort: 1433
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mssql-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
