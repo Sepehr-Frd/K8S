@@ -10,10 +10,10 @@ spec:
     - host: localhost.net
       http:
         paths:
-          - path: /swagger
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: reddit-mockup-clusterip-service
+                name: amazon-mockup-clusterip-service
                 port:
                   number: 80

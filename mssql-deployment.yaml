@@ -17,17 +17,18 @@ spec:
           image: local/mssql/server:2022
           resources:
             limits:
-              memory: "2048Mi"
-              cpu: "1.0"
+              memory: "512Mi"
+              cpu: "500m"
           ports:
             - containerPort: 1433
           env:
-            - name: User_Id
-              value: "sa"
             - name: ACCEPT_EULA
               value: "Y"
             - name: SA_PASSWORD
-              value: "Sfr1376."
+              valueFrom:
+                secretKeyRef:
+                  name: mssql
+                  key: "SA_PASSWORD"
             - name: Trust_Server_Certificate
               value: "True"
             - name: Encrypt
