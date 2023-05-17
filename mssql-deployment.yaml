@@ -17,8 +17,8 @@ spec:
           image: local/mssql/server:2022
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "2048Mi"
+              cpu: "1.0"
           ports:
             - containerPort: 1433
           env:
@@ -52,5 +52,18 @@ spec:
   ports:
     - name: mssql
       protocol: TCP
+      port: 1433
+      targetPort: 1433
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: mssql
+  ports:
+    - protocol: TCP
       port: 1433
       targetPort: 1433
