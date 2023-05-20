@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: amazonmockup-nodeport-service
+  name: dataselector-nodeport-service
 spec:
   type: NodePort
   selector:
-    app: amazonmockup
+    app: dataselector
   ports:
     - name: http
       protocol: TCP
