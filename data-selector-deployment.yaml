@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: amazon-mockup-deployment
+  name: data-selector-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: amazonmockup
+      app: dataselector
   template:
     metadata:
       labels:
-        app: amazonmockup
+        app: dataselector
     spec:
       containers:
-        - name: amazonmockup
-          image: local/amazon-mockup-web:1.0
+        - name: dataselector
+          image: local/data-selector-web:1.0
           resources:
             limits:
               memory: "512Mi"
@@ -23,11 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: amazon-mockup-clusterip-service
+  name: data-selector-clusterip-service
 spec:
   type: ClusterIP
   selector:
-    app: amazonmockup
+    app: dataselector
   ports:
     - name: http
       protocol: TCP
