@@ -12,11 +12,6 @@ spec:
       labels:
         app: dataselector
     spec:
-      initContainers:
-        - name: redditmockup
-          image: local/reddit-mockup-web:1.0
-        - name: mongodb
-          image: mongo:6.0.5
       containers:
         - name: dataselector
           image: local/data-selector-web:1.0

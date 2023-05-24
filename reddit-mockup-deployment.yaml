@@ -12,9 +12,6 @@ spec:
       labels:
         app: redditmockup
     spec:
-      initContainers:
-        - name: mssql
-          image: local/mssql/server:2022
       containers:
         - name: redditmockup
           image: local/reddit-mockup-web:1.0
