@@ -17,7 +17,7 @@ spec:
           image: local/data-selector-web:1.0
           resources:
             limits:
-              memory: "512Mi"
+              memory: "250Mi"
               cpu: "500m"
 ---
 apiVersion: v1
